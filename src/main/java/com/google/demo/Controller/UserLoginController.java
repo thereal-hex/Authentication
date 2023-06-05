@@ -44,7 +44,7 @@ public class UserLoginController {
 
     @PostMapping("/otp-validation")
     public ResponseEntity<?> otpValidation(@RequestBody UserLoginEntity entity) throws Exception {
-        userLoginService.validateOtp(entity.getOtpCode(), entity.getPassword());
+        userLoginService.validateOtp(entity);
         return ResponseEntity.ok("password is successfully changed");
     }
 

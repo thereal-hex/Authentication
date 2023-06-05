@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface UserLoginRepository extends JpaRepository<UserLoginEntity, Long> {
 
@@ -20,7 +21,7 @@ public interface UserLoginRepository extends JpaRepository<UserLoginEntity, Long
     @Query(value = "select y from UserLoginEntity y where y.email =:email and y.id <> :id")
     UserLoginEntity getUserLoginEntitiesByEmailAndId(String email, Long id);
 
-    @Query(value = "select x from UserLoginEntity x where x.otpCode =:otp")
-    UserLoginEntity getByOtpCode(String otp);
+    @Query(value = "select x from UserLoginEntity x where x.name =:name and x.otpCode =:otp ")
+    UserLoginEntity getByOtpCodeAndName(String name, String otp);
 
     }

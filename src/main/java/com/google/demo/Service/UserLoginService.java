@@ -44,24 +44,11 @@ public class UserLoginService {
     }
 
     public void generateOtp(UserLoginEntity entity) throws Exception {
-        SecureRandom random = new SecureRandom();
-        UserLoginEntity userLoginEntity = repository.getByName(entity.getName());
-        String otp = String.format("%06d", random.nextInt(999999));
-        if (userLoginEntity != null) {
-            userLoginEntity.setOtpCode(otp);
-            repository.save(userLoginEntity);
-        } else
-            throw new Exception("UserNameNotFound");
+        validation.generateOtp(entity);
     }
 
-    public void validateOtp(String otpCode, String password) throws Exception {
-        UserLoginEntity userLoginEntity = repository.getByOtpCode(otpCode);
-        if (userLoginEntity != null) {
-            userLoginEntity.setPassword(password);
-            userLoginEntity.setOtpCode(null);
-            repository.save(userLoginEntity);
-        } else
-            throw new Exception("something went wrong!");
+    public void validateOtp(UserLoginEntity entity) throws Exception {
+        validation.validateOtp(entity.getName(), entity.getPassword(), entity.getOtpCode());
     }
 
     public List<UserLoginEntity> findAll() {

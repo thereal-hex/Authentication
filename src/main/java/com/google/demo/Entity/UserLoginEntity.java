@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -46,4 +47,7 @@ public class UserLoginEntity {
 
     @Column(name = "otp_code")
     private String otpCode;
+
+    @Column(name = "otp-request-time")
+    private Date otpRequestTime;
 }
